@@ -9,6 +9,8 @@ tags:
     description: Simple example endpoints
   - name: Specification
     description: The swagger API specification
+  - name: Colombia's weather
+    description: Enpoints for Colombia's annual average weather  
 
 consumes:
   - application/json
@@ -25,6 +27,19 @@ definitions:
       name:
         type: string
         description: The example name
+  WeatherBody:
+    type: object
+    title: weather
+    required:
+      - year
+      - weather
+    properties:
+      year:
+        type: integer
+        description: The year
+      weather:
+        type: number
+        description: The weather correspondig to the year   
 
 paths:
   /examples:
@@ -49,6 +64,28 @@ paths:
       responses:
         200:
           description: Returns all examples
+  /weathercol:
+    get:
+      tags:
+        - Colombia's weather
+      description: Fetch all entries of Colombia's weather
+      responses:
+        200:
+          description: Returns all entries of Colombia's weather
+    post:
+      tags:
+        - Colombia's weather
+      description: Create a new entrie of Colombia's weather
+      parameters:
+        - name: The weather correspondig to the year
+          in: body
+          description: A year with it's weather
+          required: true
+          schema: 
+            $ref: "#/definitions/WeatherBody"
+      responses:
+        200:
+          description: Returns all entries of Colombia's weather
 
   /spec:
     get:
