@@ -7,13 +7,15 @@ export class Controller {
       return res.json(r)
     });
   }
-/*
+
   get(req, res) {
     ColombiaWeatherService
-    .get()
-    .then(r => res.json(r));
+    .getByYear(req.params.year)
+    .then(r => {
+      return res.json(r)
+    });
   }
-*/
+
   create(req, res) {
     ColombiaWeatherService
       .create(req.body.year, req.body.weather)

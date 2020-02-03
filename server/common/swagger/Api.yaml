@@ -64,7 +64,21 @@ paths:
       responses:
         200:
           description: Returns all examples
-  /weathercol:
+  /weather/col/{year}:
+    get:
+      tags:
+        - Colombia's weather by year
+      parameters:
+        - in: path
+          name: year
+          type: integer
+          required: true
+          description: Year to query
+      description: Fetch a year of Colombia's weather
+      responses:
+        200:
+          description: Returns a year of Colombia's weather
+  /weather/col:
     get:
       tags:
         - Colombia's weather

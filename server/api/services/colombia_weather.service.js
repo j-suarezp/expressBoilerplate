@@ -1,5 +1,4 @@
 import l from '../../common/logger';
-import { rejects } from 'assert';
 
 let id = 0;
 const colombiaWeather = [];
@@ -8,7 +7,15 @@ const dataUrl = 'http://climatedataapi.worldbank.org/climateweb/rest/v1/country/
 export class ColombiaWeatherService {
 
   all() {
+    l.info(`${this.constructor.name}.all()`);
     return this.initData();
+  }
+
+  getByYear(year) {
+    l.info(`${this.constructor.name}.getByYear()`);
+    return Promise.resolve(colombiaWeather.find(iterator => {
+      return iterator.year == year;
+    }));
   }
 
   create(year, weather) {
@@ -39,12 +46,10 @@ export class ColombiaWeatherService {
                   item.id = id++;
                   colombiaWeather.push(item);
               });
-              l.info(`${this.constructor.name}.all()`);
               resolve(colombiaWeather);
           });
       }
       else {
-        l.info(`${this.constructor.name}.all()`);
         resolve(colombiaWeather);
       }
     });
